@@ -1,9 +1,16 @@
 
-
-export default function Home() {
+function Banner(props: { name: string }) {
   return (
-    <div className="font-sans lg:text-9xl text-center">
-      <div>Hello, World!</div>
+    <div className="ribbon flex-1 m-8">Hello, {props.name}!</div>
+  )
+}
+
+export default async function Home() {
+
+  //TODO: Integrate with api
+  return (
+    <div className="font-sans text-6xl text-center flex items-stretch">
+      <Banner name="World"/>
     </div>
   );
 }
