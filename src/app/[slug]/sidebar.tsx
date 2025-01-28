@@ -1,29 +1,32 @@
-import { RefObject } from "react";
+'use client'
 
-function MenuItem({ text, scrollRef }: { text: string, scrollRef: RefObject<HTMLElement | null> }) {
+function MenuItem({ id, title }: { id: string, title: string }) {
     const scrollTo = () => {
-        if (scrollRef && scrollRef.current) {
-            scrollRef.current.scrollIntoView({ behavior: "smooth" });
-        }
+        const e = document.getElementById(id);
+
+        e?.scrollIntoView({
+            block: "center",
+            behavior: "smooth"
+        });
     }
     
     return (
         <div onClick={scrollTo} className={"cursor-pointer select-none overflow-hidden group-hover:opacity-100 opacity-0 ease-in-out duration-300"}>
-            <div className="font-sans text-2xl text-[--background] bg-transparent hover:bg-[--color-4] duration-200 ease-in-out h-20 flex justify-center items-center">{text}</div>
+            <div className="font-sans text-2xl text-[--background] bg-transparent hover:bg-[--color-4] duration-200 ease-in-out h-20 flex justify-center items-center">{title}</div>
         </div>
     )
 }
 
 export default function Sidebar(props: {
-    aboutMeRef: RefObject<HTMLElement | null>,
-    socialsRef: RefObject<HTMLElement | null>,
-    projectsRef: RefObject<HTMLElement | null>
+    items: { id: string, title: string }[]
 }) {
     return (
         <div className="group font-sans w-24 h-screen m-0 bg-[--foreground] hover:w-64 opacity-15 hover:opacity-100 duration-300 ease-in-out">
-            <MenuItem text="About Me" scrollRef={props.aboutMeRef}/>
-            <MenuItem text="Socials" scrollRef={props.socialsRef}/>
-            <MenuItem text="Projects" scrollRef={props.projectsRef}/>
+            <ul>
+                {props.items.map((item) => {
+                    return <li key={item.id}><MenuItem id={item.id} title={item.title}/></li>
+                })}
+            </ul>
         </div>
     );
 };
