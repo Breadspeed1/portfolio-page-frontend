@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 const GITHUB_LINK = "https://github.com/Breadspeed1";
 const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";
+const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
 function SocialLink(props: {
   src: string,
@@ -25,7 +26,7 @@ export default async function Home({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const uri = "http://127.0.0.1:8000/ref/" + (await params).slug + "/name";
+  const uri = BACKEND_ADDRESS + "/ref/" + (await params).slug + "/name";
   const res = await fetch(uri);
 
   if (!res.ok) {
