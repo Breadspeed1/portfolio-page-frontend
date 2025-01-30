@@ -3,5 +3,5 @@
 import { redirect } from "next/navigation";
 
 export default async function Default() {
-    redirect('/default')
+    redirect('/NOREF')
 }

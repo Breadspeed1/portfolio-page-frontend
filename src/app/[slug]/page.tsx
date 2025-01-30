@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Sidebar from "./sidebar";
 import Description from "./description";
+import { redirect } from "next/navigation";
 
 const GITHUB_LINK = "https://github.com/Breadspeed1";
 const LINKDEDIN_LINK = "www.linkedin.com/in/aiden-voth-a0972b334";
@@ -24,6 +25,14 @@ export default async function Home({
 }: {
   params: Promise<{ slug: string }>
 }) {
+  const uri = "http://localhost:8000/ref/" + (await params).slug + "/name";
+  const res = await fetch(uri);
+
+  if (!res.ok) {
+    redirect("/NOREF");
+  }
+
+  const name = await res.text();
 
   //TODO: Integrate with api
   return (
@@ -37,7 +46,7 @@ export default async function Home({
       </div>
       <div className="flex-1 bg-[--color-2] p-10 ml-20">
         <div id="about-me"></div>
-        <Description name={(await params).slug} />
+        <Description name={name} />
         <div id="socials" className="flex justify-evenly items-center ml-24 mr-24 mt-24">
           <SocialLink w={64} h={64} src={"/github-mark-white.png"} alt="github cat" link={GITHUB_LINK} />
           <SocialLink w={256} h={256} src={"/LI-Logo.png"} alt="linkedin logo" link={LINKDEDIN_LINK} />
