@@ -35,7 +35,7 @@ export default function Description(props: { name: string }) {
           I am curently a student of <b>Software Engineering</b> at Rochester Institute of Technology (<b>RIT</b>).
           I am a <b>full-stack</b> engineer, and I especially enjoy <b>back-end</b>.
           My favorite language to work in is <b>Rust</b>.
-          This is a test to see if the ci/cd is working
+          This is a test to see if the ci/cd is working part 2
         </div>
       </div>
     )
