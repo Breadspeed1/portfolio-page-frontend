@@ -4,7 +4,7 @@ import Description from "./description";
 import { redirect } from "next/navigation";
 
 const GITHUB_LINK = "https://github.com/Breadspeed1";
-const LINKDEDIN_LINK = "www.linkedin.com/in/aiden-voth-a0972b334";
+const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";
 
 function SocialLink(props: {
   src: string,
