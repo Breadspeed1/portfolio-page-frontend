@@ -25,7 +25,7 @@ export default async function Home({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const uri = "http://localhost:8000/ref/" + (await params).slug + "/name";
+  const uri = "http://127.0.0.1:8000/ref/" + (await params).slug + "/name";
   const res = await fetch(uri);
 
   if (!res.ok) {
