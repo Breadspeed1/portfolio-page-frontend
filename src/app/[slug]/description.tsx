@@ -23,11 +23,11 @@ export default function Description(props: { name: string }) {
     })
   
     const intro = (
-      <div className="font-sans text-8xl text-left ml-5">Hey <b className="break-all">{slug}</b>,<br/> I&apos;m <b>Aiden</b>.</div>
+      <div className="font-sans text-4xl md:text-7xl text-left ml-5">Hey <b className="break-all">{slug}</b>,<br/> I&apos;m <b>Aiden</b>.</div>
     );
   
     const desc = (
-      <div className="font-sans text-3xl text-left ml-8 pt-8 flex">
+      <div className="font-sans text-lg md:text-3xl text-left ml-8 pt-8 flex">
         <div className="w-2 flex-none bg-[--color-4] mr-4">
           
         </div>
@@ -35,7 +35,6 @@ export default function Description(props: { name: string }) {
           I am curently a student of <b>Software Engineering</b> at Rochester Institute of Technology (<b>RIT</b>).
           I am a <b>full-stack</b> engineer, and I especially enjoy <b>back-end</b>.
           My favorite language to work in is <b>Rust</b>.
-          This is a test to see if the ci/cd is working part 2
         </div>
       </div>
     )

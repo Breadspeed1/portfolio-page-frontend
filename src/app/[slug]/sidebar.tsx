@@ -21,7 +21,7 @@ export default function Sidebar(props: {
     items: { id: string, title: string }[]
 }) {
     return (
-        <div className="group font-sans w-24 h-screen m-0 bg-[--foreground] hover:w-64 opacity-15 hover:opacity-100 duration-300 ease-in-out">
+        <div className="group sm:visible invisible font-sans w-24 h-screen m-0 bg-[--foreground] hover:w-64 opacity-15 hover:opacity-100 duration-300 ease-in-out">
             <ul>
                 {props.items.map((item) => {
                     return <li key={item.id}><MenuItem id={item.id} title={item.title}/></li>
