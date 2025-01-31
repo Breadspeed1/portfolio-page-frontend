@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { AddRef } from "./api"
+import { AddRef, DeleteRef } from "./api"
 import Form from 'next/form'
 import { redirect } from "next/navigation"
 
@@ -50,9 +50,15 @@ export default function Reflist({ refs }: {
 }) {
     const [isCreating, setIsCreating] = useState(false);
 
+    const deleteItem = (refstr: string) => {
+        DeleteRef(refstr).then(() => {
+            window.location.reload()
+        })
+    }
+    
     return (
         <div className="bg-[--color-4] h-full">
-            <ul className="flex-col justify-normal items-center h-full">
+            <ul className="flex-col justify-normal items-center h-full overflow-y-auto">
                 
                 <GetCreateItem isCreating={isCreating} setIsCreating={setIsCreating} />
 
@@ -64,9 +70,12 @@ export default function Reflist({ refs }: {
                     name: string
                 }) => {
                     return (
-                        <li onClick={() => openRef(refstr)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 hover:cursor-pointer select-none" key={refstr}>
-                            {name} {"=>"} {refstr}
-                        </li>
+                        <div className="flex" key={refstr}>
+                            <li onClick={() => openRef(refstr)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 hover:cursor-pointer select-none">
+                                {name}
+                            </li>
+                            <button onClick={() => deleteItem(refstr)} className="pr-6 pl-6 font-sans text-[--color-2] hover:bg-slate-400">Delete</button>
+                        </div>
                     )
                 })}
             </ul>
