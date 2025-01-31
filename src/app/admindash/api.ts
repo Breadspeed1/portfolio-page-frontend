@@ -8,3 +8,9 @@ export async function GetRefList() {
 
     return res.ok ? await res.json() : null
 }
+
+export async function AddRef(name: string) {
+    const uri = BACKEND_ADDRESS + '/ref/create/' + name;
+    const res = await fetch(uri, { method: "POST" });
+    return res.ok
+}
