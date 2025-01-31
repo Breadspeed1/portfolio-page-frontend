@@ -56,7 +56,7 @@ export default function Reflist({ refs }: {
                 
                 <GetCreateItem isCreating={isCreating} setIsCreating={setIsCreating} />
 
-                {refs.map(({
+                {refs.toSorted((a, b) => { return a.name.localeCompare(b.name) }).map(({
                     refstr,
                     name
                 } : {
