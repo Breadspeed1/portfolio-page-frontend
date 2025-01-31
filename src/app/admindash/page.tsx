@@ -6,7 +6,9 @@ export default async function Admin({
 }: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-    const params = await searchParams;
+    const refstr = (await searchParams)["ref"];
+
+    console.log(refstr)
 
     return (
         <div className="flex justify-stretch items-center h-screen w-full">

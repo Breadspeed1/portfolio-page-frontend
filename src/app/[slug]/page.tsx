@@ -2,10 +2,12 @@ import Image from "next/image";
 import Sidebar from "./sidebar";
 import Description from "./description";
 import { redirect } from "next/navigation";
+import { GetRefname as GetRefName } from "../admindash/api";
 
 const GITHUB_LINK = "https://github.com/Breadspeed1";
 const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";
-const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
+export const FAILURE_REDIRECT = "/NOREF";
+
 
 function SocialLink(props: {
   src: string,
@@ -26,14 +28,11 @@ export default async function Home({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const uri = BACKEND_ADDRESS + "/ref/" + (await params).slug + "/name";
-  const res = await fetch(uri);
+  const name = await GetRefName((await params).slug)
 
-  if (!res.ok) {
-    redirect("/NOREF");
+  if (!name) {
+    redirect(FAILURE_REDIRECT)
   }
-
-  const name = await res.text();
 
   //TODO: Integrate with api
   return (

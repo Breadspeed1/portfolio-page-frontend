@@ -12,6 +12,7 @@ export async function GetRefList() {
 export async function AddRef(name: string) {
     const uri = BACKEND_ADDRESS + '/ref/create/' + name
     const res = await fetch(uri, { method: "POST" })
+    
     return res.ok
 }
 
@@ -20,4 +21,16 @@ export async function DeleteRef(refstr: string) {
     const res = await fetch(uri, { method: "DELETE" })
 
     return res.ok
+}
+
+export async function GetRefname(refstr: string) {
+    const uri = BACKEND_ADDRESS + "/ref/" + refstr + "/name"
+    const res = await fetch(uri)
+
+    if (res.ok) {
+        return await res.text()
+    }
+    else {
+        return null
+    }
 }
