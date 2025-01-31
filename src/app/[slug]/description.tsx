@@ -23,11 +23,11 @@ export default function Description(props: { name: string }) {
     })
   
     const intro = (
-      <div className="font-sans text-4xl md:text-7xl text-left ml-5">Hey <b className="break-all">{slug}</b>,<br/> I&apos;m <b>Aiden</b>.</div>
+      <div className="font-sans text-4xl md:text-7xl text-left">Hey <b className="break-all">{slug}</b>,<br/> I&apos;m <b>Aiden</b>.</div>
     );
   
     const desc = (
-      <div className="font-sans text-lg md:text-3xl text-left ml-8 pt-8 flex">
+      <div className="font-sans text-lg md:text-3xl text-left pt-8 flex">
         <div className="w-2 flex-none bg-[--color-4] mr-4">
           
         </div>

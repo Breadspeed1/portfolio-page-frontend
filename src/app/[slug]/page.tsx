@@ -45,7 +45,7 @@ export default async function Home({
           { id: "projects", title: "Projects" }
         ]}/>
       </div>
-      <div className="flex flex-1 flex-col justify-center items-center bg-[--color-2] p-10 h-auto">
+      <div className="flex flex-1 flex-col justify-center items-center bg-[--color-2]q h-auto">
         <div id="about-me" className="flex-1 lg:w-[50vw] h-auto  w-full">
           <Description name={name} />
         </div>
@@ -53,7 +53,7 @@ export default async function Home({
           <SocialLink w={64} h={64} src={"/github-mark-white.png"} alt="github cat" link={GITHUB_LINK} />
           <SocialLink w={256} h={256} src={"/LI-Logo.png"} alt="linkedin logo" link={LINKDEDIN_LINK} />
         </div>
-        <div id="projects flex-none" className="font-sans text-4xl md:text-7xl ml-5 mt-24 flex-1 lg:w-[50vw] w-full"><b>Projects</b></div>
+        <div id="projects flex-none" className="font-sans text-4xl md:text-7x mt-24 flex-1 lg:w-[50vw] w-full"><b>Projects</b></div>
       </div>
     </div>
   );
