@@ -71,10 +71,10 @@ export default function Reflist({ refs }: {
                 }) => {
                     return (
                         <div className="flex" key={refstr}>
-                            <li onClick={() => openRef(refstr)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 hover:cursor-pointer select-none">
+                            <li onClick={() => openRef(refstr)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 active:bg-slate-700 hover:cursor-pointer select-none">
                                 {name}
                             </li>
-                            <button onClick={() => deleteItem(refstr)} className="pr-6 border-l-2 pl-6 font-sans text-[--color-2] hover:bg-slate-400">Delete</button>
+                            <button onClick={() => deleteItem(refstr)} className="pr-6 border-l-2 pl-6 font-sans text-[--color-2] active:bg-slate-700 hover:bg-slate-400">Delete</button>
                         </div>
                     )
                 })}
