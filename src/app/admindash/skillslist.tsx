@@ -27,6 +27,11 @@ export default function SkillsList({
         }
     }
 
+    const boldIfFound = (skill: string) => {
+        const found = added_skills.find((r) => {return r == skill})
+        return found ? <b>{skill}</b> : skill
+    }
+
     return (
         <div className="bg-[--color-4] h-full">
             <ul className="flex-col justify-normal items-center h-full overflow-y-auto">
@@ -46,7 +51,7 @@ export default function SkillsList({
                     return (
                         <div className="flex" key={skill}>
                             <li className="flex-1 overflow-x-auto border-b-2 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 active:bg-slate-700 hover:cursor-pointer select-none">
-                                {skill}
+                                {boldIfFound(skill)}
                             </li>
                             <button className="pr-6 border-b-2 border-l-2 pl-6 font-sans text-[--color-2] active:bg-slate-700 hover:bg-slate-400">Delete</button>
                         </div>
