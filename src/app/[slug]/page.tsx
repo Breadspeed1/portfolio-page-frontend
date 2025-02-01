@@ -2,7 +2,7 @@ import Image from "next/image";
 import Sidebar from "./sidebar";
 import Description from "./description";
 import { redirect } from "next/navigation";
-import { GetRefname as GetRefName } from "../admindash/api";
+import { GetRefName as GetRefName } from "../admindash/api";
 
 const GITHUB_LINK = "https://github.com/Breadspeed1";
 const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";

@@ -33,12 +33,12 @@ function GetCreateItem({
 
             setIsCreating(false)
         }}>
-            <input className="flex-1 ml-5 text-black" name="name" />
+            <input data-lpignore="true" autoComplete="off" className="flex-1 ml-5 text-black" name="name" />
             <button className="flex-1" type="submit">Create</button>
         </Form>
     }
     else {
-        return <ul onClick={() => setIsCreating(true)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 mb-10 hover:bg-slate-400 hover:cursor-pointer select-none">CREATE</ul>
+        return <ul onClick={() => setIsCreating(true)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 mb-10 hover:bg-slate-400 hover:cursor-pointer select-none"><b>CREATE</b></ul>
     }
 }
 
@@ -71,10 +71,10 @@ export default function Reflist({ refs }: {
                 }) => {
                     return (
                         <div className="flex" key={refstr}>
-                            <li onClick={() => openRef(refstr)} className="flex-1 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 active:bg-slate-700 hover:cursor-pointer select-none">
+                            <li onClick={() => openRef(refstr)} className="flex-1 overflow-x-auto border-b-2 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 active:bg-slate-700 hover:cursor-pointer select-none">
                                 {name}
                             </li>
-                            <button onClick={() => deleteItem(refstr)} className="pr-6 border-l-2 pl-6 font-sans text-[--color-2] active:bg-slate-700 hover:bg-slate-400">Delete</button>
+                            <button onClick={() => deleteItem(refstr)} className="pr-6 border-b-2 border-l-2 pl-6 font-sans text-[--color-2] active:bg-slate-700 hover:bg-slate-400">Delete</button>
                         </div>
                     )
                 })}
