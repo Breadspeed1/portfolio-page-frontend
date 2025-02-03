@@ -3,9 +3,10 @@ import Sidebar from "./sidebar";
 import Description from "./description";
 import { redirect } from "next/navigation";
 import { GetRefName as GetRefName } from "../admindash/api";
-import { Flex, Grid, Section, TabNav } from "@radix-ui/themes";
+import { Box, Card, Flex, Grid, ScrollArea, Section, TabNav } from "@radix-ui/themes";
 import Link from "next/link";
 import Nav from "./nav";
+import Socials from "./socials";
 
 const GITHUB_LINK = "https://github.com/Breadspeed1";
 const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";
@@ -40,10 +41,15 @@ export default async function Home({
   //TODO: Integrate with api
   return (
     <>
-      <Nav/>
-      <Flex align="center" justify="center">
-        <Description name={name}/>
+      <Flex position="sticky" top="4" justify="center" align="center">
+        <Card variant="surface" size="1">
+          <Nav/>
+        </Card>
       </Flex>
+      <Flex align="center" justify="center" direction="column">
+          <Description name={name}/>
+          <Socials />
+        </Flex>
     </>
 
     // <div className="flex overflow-wrap text-wrap break-words">

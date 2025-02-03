@@ -1,6 +1,6 @@
 'use client'
 
-import { Blockquote, Heading, Section, Separator, Strong, Text } from '@radix-ui/themes';
+import { Blockquote, Heading, Section, Separator, Strong } from '@radix-ui/themes';
 import { useState, useEffect } from 'react';
 
 const TYPE_SPEED = 200;
@@ -23,23 +23,15 @@ export default function Description(props: { name: string }) {
         }
     })
   
-    const intro = (
-      <Heading size="9">Hey <Strong>{slug}</Strong>,<br/> I&apos;m Aiden.</Heading>
-    );
-  
-    const desc = (
-      <Blockquote size="4">
-        I am curently a student of <Strong>Software Engineering</Strong> at Rochester Institute of Technology (<Strong>RIT</Strong>).
-        I am a <Strong>full-stack</Strong> engineer, and I especially enjoy <Strong>back-end</Strong>.
-        My favorite language to work in is <Strong>Rust</Strong>.
-      </Blockquote>
-    )
-  
     return (
-      <Section mx="6" flexShrink="1" maxWidth={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }}>
-        {intro}
+      <Section id='about-me' mx="6" flexShrink="1" maxWidth={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }}>
+        <Heading size="9">Hey <Strong>{slug}</Strong>,<br/> I&apos;m Aiden.</Heading>
         <Separator my="2" size="4"/>
-        {desc}
+        <Blockquote size="4">
+          I am curently a student of <Strong>Software Engineering</Strong> at Rochester Institute of Technology (<Strong>RIT</Strong>).
+          I am a <Strong>full-stack</Strong> engineer, and I especially enjoy <Strong>back-end</Strong>.
+          My favorite language to work in is <Strong>Rust</Strong>.
+        </Blockquote>
       </Section>
     )
   }

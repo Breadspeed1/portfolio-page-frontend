@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Aiden Voth",
@@ -17,16 +18,18 @@ export default function RootLayout({
     <html lang="en">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body>
-        <Theme 
-          panelBackground="translucent"
-          scaling="110%"
-          radius="medium"
-          accentColor="red"
-          grayColor="gray"
-        >
-          <ThemePanel/>
-          {children}
-        </Theme>
+        <ThemeProvider attribute="class">
+          <Theme 
+            panelBackground="translucent"
+            scaling="110%"
+            radius="medium"
+            accentColor="red"
+            grayColor="gray"
+          >
+            {/*<ThemePanel/>*/}
+            {children}
+          </Theme>
+        </ThemeProvider>
       </body>
     </html>
   );

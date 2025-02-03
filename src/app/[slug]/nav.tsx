@@ -1,44 +1,35 @@
 'use client'
 
-import { TabNav } from "@radix-ui/themes"
-import { useState } from "react"
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import { IconButton, TabNav } from "@radix-ui/themes"
+import { useTheme } from "next-themes"
+import ScrollInto from "react-scroll-into-view"
 
 const SECTIONS = [
-    ["#about-me", "About Me"],
-    ["#socials", "Socials"], 
-    ["#projects", "Projects"]
+    ["about-me", "About Me"],
+    ["socials", "Socials"], 
+    ["projects", "Projects"]
 ]
 
-function getClosestSection() {
-    let closest = null
-    let closestVal = -1
-
-    for (const section in SECTIONS) {
-        const elem = document.getElementById(section[0])
-        const rect = elem?.getBoundingClientRect()
-
-        if (!rect?.top || rect?.top < 0) continue
-        
-        if (closestVal == -1 || rect?.top < closestVal) {
-            closestVal = rect?.top
-            closest = elem?.id
-        }
-    }
-
-    return closest
-}
-
 export default function Nav() {
-    const [closest, setClosest] = useState(getClosestSection())
-    addEventListener("scroll", () => setClosest(getClosestSection()))
+    const {systemTheme, theme, setTheme} = useTheme()
+
+    const toggleTheme = () => {
+        setTheme(theme === "dark" ? "light" : "dark")
+    }
 
     return (
         <TabNav.Root justify="center" size="2">
             {SECTIONS.map(([id, name]) => {
-                return <TabNav.Link key={id} active={closest == id} href={id}>
-                    {name}
-                </TabNav.Link>
+                return <ScrollInto key={id} selector={"#" + id} smooth={true}>
+                    <TabNav.Link>
+                        {name}
+                    </TabNav.Link>
+                </ScrollInto>
             })}
+            <TabNav.Link>
+                {theme === "dark" ? <SunIcon onClick={toggleTheme}/> : <MoonIcon onClick={toggleTheme}/> }
+            </TabNav.Link>
         </TabNav.Root>
     )
 }
