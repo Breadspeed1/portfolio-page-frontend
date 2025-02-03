@@ -3,7 +3,7 @@ import Sidebar from "./sidebar";
 import Description from "./description";
 import { redirect } from "next/navigation";
 import { GetRefName as GetRefName } from "../admindash/api";
-import { Flex, Grid, TabNav } from "@radix-ui/themes";
+import { Flex, Grid, Section, TabNav } from "@radix-ui/themes";
 import Link from "next/link";
 import Nav from "./nav";
 
@@ -41,6 +41,9 @@ export default async function Home({
   return (
     <>
       <Nav/>
+      <Flex align="center" justify="center">
+        <Description name={name}/>
+      </Flex>
     </>
 
     // <div className="flex overflow-wrap text-wrap break-words">

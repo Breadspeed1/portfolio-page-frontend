@@ -33,7 +33,7 @@ export default function Nav() {
     addEventListener("scroll", () => setClosest(getClosestSection()))
 
     return (
-        <TabNav.Root size="2">
+        <TabNav.Root justify="center" size="2">
             {SECTIONS.map(([id, name]) => {
                 return <TabNav.Link key={id} active={closest == id} href={id}>
                     {name}

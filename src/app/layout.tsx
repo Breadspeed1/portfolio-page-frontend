@@ -19,7 +19,7 @@ export default function RootLayout({
       <body>
         <Theme 
           panelBackground="translucent"
-          scaling="100%"
+          scaling="110%"
           radius="medium"
           accentColor="red"
           grayColor="gray"

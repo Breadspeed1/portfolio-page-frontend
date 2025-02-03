@@ -1,5 +1,6 @@
 'use client'
 
+import { Blockquote, Heading, Section, Separator, Strong, Text } from '@radix-ui/themes';
 import { useState, useEffect } from 'react';
 
 const TYPE_SPEED = 200;
@@ -23,26 +24,22 @@ export default function Description(props: { name: string }) {
     })
   
     const intro = (
-      <div className="font-sans text-4xl md:text-7xl text-left">Hey <b className="break-all">{slug}</b>,<br/> I&apos;m <b>Aiden</b>.</div>
+      <Heading size="9">Hey <Strong>{slug}</Strong>,<br/> I&apos;m Aiden.</Heading>
     );
   
     const desc = (
-      <div className="font-sans text-lg md:text-3xl text-left pt-8 flex">
-        <div className="w-2 flex-none bg-[--color-4] mr-4">
-          
-        </div>
-        <div className="flex-1">
-          I am curently a student of <b>Software Engineering</b> at Rochester Institute of Technology (<b>RIT</b>).
-          I am a <b>full-stack</b> engineer, and I especially enjoy <b>back-end</b>.
-          My favorite language to work in is <b>Rust</b>.
-        </div>
-      </div>
+      <Blockquote size="4">
+        I am curently a student of <Strong>Software Engineering</Strong> at Rochester Institute of Technology (<Strong>RIT</Strong>).
+        I am a <Strong>full-stack</Strong> engineer, and I especially enjoy <Strong>back-end</Strong>.
+        My favorite language to work in is <Strong>Rust</Strong>.
+      </Blockquote>
     )
   
     return (
-      <div>
+      <Section mx="6" flexShrink="1" maxWidth={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }}>
         {intro}
+        <Separator my="2" size="4"/>
         {desc}
-      </div>
+      </Section>
     )
   }
