@@ -66,3 +66,31 @@ export async function GetSkillsList() {
 
     return json ? json : null
 }
+
+export async function CreateSkill(skill: string) {
+    const uri = BACKEND_ADDRESS + "/skills/create/" + skill
+    const res = await fetch(uri, { method: "POST" })
+
+    return res.ok
+}
+
+export async function AddSkillToRef(refstr: string, skill: string) {
+    const uri = BACKEND_ADDRESS + "/ref/" + refstr + "/add_skill/" + skill
+    const res = await fetch(uri, { method: "POST" })
+
+    return res.ok
+}
+
+export async function RemoveSkillFromRef(refstr: string, skill: string) {
+    const uri = BACKEND_ADDRESS + "/ref/" + refstr + "/remove_skill/" + skill
+    const res = await fetch(uri, { method: "DELETE" })
+
+    return res.ok
+}
+
+export async function DeleteSkill(skill: string) {
+    const uri = BACKEND_ADDRESS + "/skills/delete/" + skill
+    const res = await fetch(uri, { method: "DELETE" })
+
+    return res.ok
+}

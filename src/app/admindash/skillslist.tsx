@@ -3,6 +3,7 @@
 import Fuse from "fuse.js"
 import Form from "next/form"
 import { ChangeEvent, useState } from "react"
+import { AddSkillToRef, CreateSkill, DeleteSkill, RemoveSkillFromRef } from "./api"
 
 export default function SkillsList({
     added_skills,
@@ -32,6 +33,28 @@ export default function SkillsList({
         return found ? <b>{skill}</b> : skill
     }
 
+    const addSkillToRef = (skill: string) => {
+        if (!refstr) return
+
+        AddSkillToRef(refstr, skill).then((res) => {
+            if (res) window.location.reload()
+        })
+    }
+
+    const removeSkillFromRef = (skill: string) => {
+        if (!refstr) return
+
+        RemoveSkillFromRef(refstr, skill).then((res) => {
+            if (res) window.location.reload()
+        })
+    }
+
+    const deleteSkill = (skill: string) => {
+        DeleteSkill(skill).then((res) => {
+            if (res) window.location.reload()
+        })
+    }
+
     return (
         <div className="bg-[--color-4] h-full">
             <ul className="flex-col justify-normal items-center h-full overflow-y-auto">
@@ -39,8 +62,9 @@ export default function SkillsList({
                     const name = formData.get("name")
                     
                     if (name?.toString()) {
-                        //create skill
-                        window.location.reload()
+                        CreateSkill(name.toString()).then((res) => {
+                            if (res) window.location.reload()
+                        })
                     }
                 }}>
                     <input data-lpignore="true" autoComplete="off" className="flex-1 ml-5 text-black" name="name" onChange={updateSearchResults} />
@@ -50,10 +74,10 @@ export default function SkillsList({
                 {skills.map((skill) => {
                     return (
                         <div className="flex" key={skill}>
-                            <li className="flex-1 overflow-x-auto border-b-2 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 active:bg-slate-700 hover:cursor-pointer select-none">
+                            <li onClick={() => added_skills.includes(skill) ? removeSkillFromRef(skill) : addSkillToRef(skill)} className="flex-1 overflow-x-auto border-b-2 text-center font-sans text-[--color-2] pt-5 pb-5 hover:bg-slate-400 active:bg-slate-700 hover:cursor-pointer select-none">
                                 {boldIfFound(skill)}
                             </li>
-                            <button className="pr-6 border-b-2 border-l-2 pl-6 font-sans text-[--color-2] active:bg-slate-700 hover:bg-slate-400">Delete</button>
+                            <button onClick={() => deleteSkill(skill)} className="pr-6 border-b-2 border-l-2 pl-6 font-sans text-[--color-2] active:bg-slate-700 hover:bg-slate-400">Delete</button>
                         </div>
                     )
                 })}
