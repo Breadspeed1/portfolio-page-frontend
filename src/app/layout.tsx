@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { Theme, ThemePanel } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import "./globals.css";
-import { Theme } from "@radix-ui/themes";
 
 export const metadata: Metadata = {
   title: "Aiden Voth",
@@ -15,15 +16,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <Theme 
-        panelBackground="translucent"
-        scaling="100%"
-        radius="medium"
-      >
-        <body>
+      <body>
+        <Theme 
+          panelBackground="translucent"
+          scaling="100%"
+          radius="medium"
+          accentColor="red"
+          grayColor="gray"
+        >
+          <ThemePanel/>
           {children}
-        </body>
-      </Theme>
+        </Theme>
+      </body>
     </html>
   );
 }

@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  scroll-behavior: smooth;
+  scroll-snap-align: center;
+}
+
 :root, .light, .light-theme {
   --red-1: #e3e2e2;
   --red-2: #e0dcda;
