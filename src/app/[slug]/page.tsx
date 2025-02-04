@@ -28,9 +28,9 @@ export default async function Home({
         </Card>
       </Flex>
       <Flex align="center" justify="center" direction="column">
-          <Description name={name}/>
-          <Socials />
-        </Flex>
+        <Description name={name}/>
+        <Socials />
+      </Flex>
     </>
   );
 }
