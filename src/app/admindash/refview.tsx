@@ -1,5 +1,7 @@
 'use client'
 
+import { Flex, Heading, Text } from "@radix-ui/themes";
+
 export default function RefView(props: {
     name: string,
     refstr: string,
@@ -13,11 +15,19 @@ export default function RefView(props: {
     }
 
     return (
-        <div className="text-4xl text-center">
-            <div className="mt-5">{props.name}</div>
-            <div onClick={copyRef} className="border-4 border-white ml-5 mr-5 pt-5 pb-5 mt-10 text-[--color-4] hover:text-slate-500 hover:cursor-pointer">{refUrl}</div>
-            <div className="mt-10">Skills:</div>
-            <div className="text-2xl">{props.skills}</div>
-        </div>
+        <Flex gapY="5" direction="column" align="center">
+            <Heading size="9" mt="9">{props.name}</Heading>
+            <Text size="5" style={{ cursor: "pointer" }} onClick={copyRef} >{refUrl}</Text>
+            <Text size="5">Skills:</Text>
+            <Flex mt="-4" direction="column" align="start">
+                {props.skills.map((skill) => {
+                    return (
+                        <Text size="4" key={skill}>
+                            {skill}
+                        </Text>
+                    )
+                })}
+            </Flex>
+        </Flex>
     )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
-import { IconButton, TabNav } from "@radix-ui/themes"
+import { TabNav } from "@radix-ui/themes"
 import { useTheme } from "next-themes"
 import ScrollInto from "react-scroll-into-view"
 
@@ -12,7 +12,7 @@ const SECTIONS = [
 ]
 
 export default function Nav() {
-    const {systemTheme, theme, setTheme} = useTheme()
+    const {theme, setTheme} = useTheme()
 
     const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark")

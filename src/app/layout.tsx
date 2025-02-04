@@ -15,22 +15,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <body>
-        <ThemeProvider attribute="class">
-          <Theme 
-            panelBackground="translucent"
-            scaling="110%"
-            radius="medium"
-            accentColor="red"
-            grayColor="gray"
-          >
-            {/*<ThemePanel/>*/}
-            {children}
-          </Theme>
-        </ThemeProvider>
-      </body>
-    </html>
+      <html lang="en">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <body>
+          <ThemeProvider defaultTheme="light" attribute="class">
+            <Theme 
+              panelBackground="translucent"
+              scaling="110%"
+              radius="medium"
+              accentColor="red"
+              grayColor="gray"
+            >
+              {/*<ThemePanel/>*/}
+              {children}
+            </Theme>
+          </ThemeProvider>
+        </body>
+      </html>
   );
 }

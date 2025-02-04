@@ -1,31 +1,12 @@
-import Image from "next/image";
-import Sidebar from "./sidebar";
 import Description from "./description";
 import { redirect } from "next/navigation";
 import { GetRefName as GetRefName } from "../admindash/api";
-import { Box, Card, Flex, Grid, ScrollArea, Section, TabNav } from "@radix-ui/themes";
-import Link from "next/link";
+import { Card, Flex } from "@radix-ui/themes";
 import Nav from "./nav";
 import Socials from "./socials";
 
-const GITHUB_LINK = "https://github.com/Breadspeed1";
-const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";
 export const FAILURE_REDIRECT = "/NOREF";
 
-
-function SocialLink(props: {
-  src: string,
-  alt: string,
-  link: string,
-  w: number,
-  h: number
-}) {
-  return (
-    <a href={props.link}>
-      <Image className="h-10 md:h-20 w-auto" src={props.src} alt={props.alt} width={props.w} height={props.h}/>
-    </a>
-  )
-}
 
 export default async function Home({
   params,

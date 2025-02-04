@@ -1,3 +1,4 @@
+import { Box, Flex } from "@radix-ui/themes";
 import { GetRef, GetRefList, GetSkillsList } from "./api"
 import Reflist from "./reflist"
 import RefView from "./refview";
@@ -18,10 +19,16 @@ export default async function Admin({
     const skills = await GetSkillsList();
 
     return (
-        <div className="flex justify-stretch items-center h-screen w-full break-words">
-            <div className="flex-none w-80 h-screen"><Reflist refs={await GetRefList()} /></div>
-            <div className="flex-1 h-screen">{ref ? <RefView refstr={refstr as string} name={ref.name} skills={ref.skills}/> : <></>}</div>
-            <div className="flex-none w-80 h-screen">{skills ? <SkillsList all_skills={skills} added_skills={ref ? ref.skills : []} refstr={refstr as string} /> : <></>}</div>
-        </div>
+        <Flex justify="center" align="center" gapX="3">
+            <Box height="100vh" flexGrow="0" flexShrink="0" width="25rem">
+                <Reflist refs={await GetRefList()} />
+            </Box>
+            <Box height="100vh" flexGrow="1" flexShrink="1" minWidth="0">
+                {ref ? <RefView refstr={refstr as string} name={ref.name} skills={ref.skills}/> : <></>}
+            </Box>
+            <Box height="100vh" flexGrow="0" flexShrink="0" width="25rem">
+                {skills ? <SkillsList all_skills={skills} added_skills={ref ? ref.skills : []} refstr={refstr as string} /> : <></>}
+            </Box>
+        </Flex>
     )
 }
