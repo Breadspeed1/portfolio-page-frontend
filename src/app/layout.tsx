@@ -26,7 +26,6 @@ export default function RootLayout({
               accentColor="red"
               grayColor="gray"
             >
-              {/*<ThemePanel/>*/}
               {children}
             </Theme>
           </ThemeProvider>
