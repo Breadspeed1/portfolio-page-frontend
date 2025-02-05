@@ -1,4 +1,6 @@
-import { Blockquote, Heading, Section, Separator, Strong } from "@radix-ui/themes"
+import { Blockquote, Flex, Heading, Section, Separator, Strong } from "@radix-ui/themes"
+import { PROJECTS } from "./projects"
+import ProjectCard from "./project-card"
 
 
 export default function ProjectSection({
@@ -25,6 +27,11 @@ export default function ProjectSection({
                     </> : <></>
                 }
             </Blockquote>
+            <Flex direction="row" justify="center" wrap="wrap" mt="5" gap="5">
+                {PROJECTS.map((project) => {
+                    return <ProjectCard key={project.title} projectData={project}/>
+                })}
+            </Flex>
         </Section>
     )
 }
