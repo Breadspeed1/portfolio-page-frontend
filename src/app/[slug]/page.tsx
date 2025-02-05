@@ -1,9 +1,10 @@
 import Description from "./description";
 import { redirect } from "next/navigation";
-import { GetRefName as GetRefName } from "../admindash/api";
+import { GetRef } from "../admindash/api";
 import { Card, Flex } from "@radix-ui/themes";
 import Nav from "./nav";
 import Socials from "./socials";
+import ProjectSection from "./projectsection";
 
 export const FAILURE_REDIRECT = "/NOREF";
 
@@ -13,13 +14,10 @@ export default async function Home({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const name = await GetRefName((await params).slug)
+  const reference = await GetRef((await params).slug)
 
-  if (!name) {
-    redirect(FAILURE_REDIRECT)
-  }
+  if (!reference) redirect(FAILURE_REDIRECT)
 
-  //TODO: Integrate with api
   return (
     <>
       <Flex position="sticky" top="4" justify="center" align="center">
@@ -28,8 +26,9 @@ export default async function Home({
         </Card>
       </Flex>
       <Flex align="center" justify="center" direction="column">
-        <Description name={name}/>
+        <Description name={reference.name}/>
         <Socials />
+        <ProjectSection skills={reference.skills}/>
       </Flex>
     </>
   );
