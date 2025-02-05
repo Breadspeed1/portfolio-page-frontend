@@ -1,4 +1,4 @@
-import { Blockquote, Flex, Heading, Section, Separator, Strong } from "@radix-ui/themes"
+import { Blockquote, Flex, Heading, Section, Separator, Strong, Text } from "@radix-ui/themes"
 import { PROJECTS } from "./projects"
 import ProjectCard from "./project-card"
 
@@ -26,6 +26,11 @@ export default function ProjectSection({
                         })} </ul></Strong>
                     </> : <></>
                 }
+                <br/>
+                <br/>
+                <Text weight="light" color="red">
+                    Hint: You can click on them to read more! (please do I spent time writing about them for your pleasure)
+                </Text>
             </Blockquote>
             <Flex direction="row" justify="center" wrap="wrap" mt="5" gap="5">
                 {PROJECTS.map((project) => {
