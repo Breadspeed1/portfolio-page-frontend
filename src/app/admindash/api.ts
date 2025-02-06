@@ -94,3 +94,23 @@ export async function DeleteSkill(skill: string) {
 
     return res.ok
 }
+
+export async function GetRefFromJWT(jwt: string) {
+    const uri = BACKEND_ADDRESS + "/getref";
+    const res = await fetch(uri, {
+        headers: [
+            ["authorization", jwt]
+        ]
+    })
+
+    if (res) return await res.text()
+    return undefined
+}
+
+export async function GetJWTForRef(ref: string) {
+    const uri = BACKEND_ADDRESS + "/token/" + ref;
+    const res = await fetch(uri)
+
+    if (res) return await res.text()
+    return undefined
+}
