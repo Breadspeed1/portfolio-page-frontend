@@ -2,8 +2,9 @@
 
 import { TextField } from "@radix-ui/themes"
 import Form from "next/form"
-import { UpgradeCookie } from "./page"
 import { redirect } from "next/navigation"
+import { UpgradeCookie } from "./upgrade"
+
 
 function handleEnter(data: FormData) {
     const pw = data.get('pw')
