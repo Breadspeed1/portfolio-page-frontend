@@ -2,9 +2,10 @@
 
 import Fuse from "fuse.js"
 import Form from "next/form"
-import { ChangeEvent, useState } from "react"
-import { AddSkillToRef, CreateSkill, DeleteSkill, RemoveSkillFromRef } from "../api"
+import { ChangeEvent, useEffect, useState } from "react"
+import { AddSkillToRef, CreateSkill, DeleteSkill, GetAuthCookie, RemoveSkillFromRef } from "../api"
 import { Button, Card, Flex, ScrollArea, Strong, Text, TextField } from "@radix-ui/themes"
+import { redirect } from "next/navigation"
 
 export default function SkillsList({
     added_skills,
@@ -17,6 +18,14 @@ export default function SkillsList({
 }) {
     const [skills, setSkills] = useState(all_skills)
     const fuse = new Fuse(all_skills)
+    const [auth, setAuth] = useState('')
+    
+    useEffect(() => {
+        GetAuthCookie().then((res) => {
+            if (res) setAuth(res.value)
+            else redirect('/')
+        })
+    })
 
     const updateSearchResults = (event: ChangeEvent<HTMLInputElement>) => {
         const text = event.target.value
@@ -37,7 +46,7 @@ export default function SkillsList({
     const addSkillToRef = (skill: string) => {
         if (!refstr) return
 
-        AddSkillToRef(refstr, skill).then((res) => {
+        AddSkillToRef(refstr, skill, auth).then((res) => {
             if (res) window.location.reload()
         })
     }
@@ -45,13 +54,13 @@ export default function SkillsList({
     const removeSkillFromRef = (skill: string) => {
         if (!refstr) return
 
-        RemoveSkillFromRef(refstr, skill).then((res) => {
+        RemoveSkillFromRef(refstr, skill, auth).then((res) => {
             if (res) window.location.reload()
         })
     }
 
     const deleteSkill = (skill: string) => {
-        DeleteSkill(skill).then((res) => {
+        DeleteSkill(skill, auth).then((res) => {
             if (res) window.location.reload()
         })
     }
@@ -64,7 +73,7 @@ export default function SkillsList({
                         const name = formData.get("name")
                     
                         if (name?.toString()) {
-                            CreateSkill(name.toString()).then((res) => {
+                            CreateSkill(name.toString(), auth).then((res) => {
                                 if (res) window.location.reload()
                             })
                         }

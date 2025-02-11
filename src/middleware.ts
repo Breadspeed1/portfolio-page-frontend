@@ -7,7 +7,10 @@ export async function middleware(request: NextRequest) {
     const slug = request.nextUrl.pathname.split('/').at(-1)
     const cookie = request.cookies.get("authorization")
 
-    if ((cookie && await GetRefFromJWT(cookie.value) == slug) || (!slug && cookie)) {
+    let ref = null
+    if (cookie) ref = await GetRefFromJWT(cookie.value)
+
+    if ((ref && ref == slug) || (!slug && ref)) {
         return res
     }
     else if (slug) {

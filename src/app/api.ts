@@ -1,5 +1,7 @@
 'use server'
 
+import { cookies } from "next/headers";
+
 const BACKEND_ADDRESS = process.env.BACKEND_ADDRESS;
 
 async function makeReqWithAuth(url: string, auth: string, method?: string) {
@@ -10,6 +12,10 @@ async function makeReqWithAuth(url: string, auth: string, method?: string) {
     })
 
     return res
+}
+
+export async function GetAuthCookie() {
+    return (await cookies()).get('authorization')
 }
 
 export async function GetRefList(auth: string) {
@@ -65,6 +71,26 @@ export async function RemoveSkillFromRef(refstr: string, skill: string, auth: st
 
 export async function DeleteSkill(skill: string, auth: string) {
     return (await makeReqWithAuth('/skills/delete/' + skill, auth, 'DELETE')).ok
+}
+
+export async function CheckAdmin(auth: string) {
+    return (await makeReqWithAuth('/admincheck', auth)).ok
+}
+
+export async function Upgrade(pw: string, auth: string) {
+    const res = await fetch(
+        BACKEND_ADDRESS + '/token/admin',
+        {
+            headers: [
+                ['authorization', auth],
+                ['Content-Type', 'application/json']
+            ],
+            method: 'POST',
+            body: JSON.stringify({ password: pw })
+        }
+    )
+
+    return await res.text()
 }
 
 export async function GetRefFromJWT(jwt: string) {

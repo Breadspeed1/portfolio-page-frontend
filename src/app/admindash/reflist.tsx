@@ -1,9 +1,10 @@
 'use client'
 
-import { AddRef, DeleteRef } from "../api"
+import { AddRef, DeleteRef, GetAuthCookie } from "../api"
 import Form from 'next/form'
 import { redirect } from "next/navigation"
 import { Button, Card, Flex, ScrollArea, Text, TextField } from "@radix-ui/themes"
+import { useEffect, useState } from "react"
 
 function openRef(ref: string) {
     redirect("/admindash?ref=" + ref)
@@ -15,9 +16,18 @@ export default function Reflist({ refs }: {
         name: string
     }[]
 }) {
+    const [auth, setAuth] = useState('')
+        
+    useEffect(() => {
+        GetAuthCookie().then((res) => {
+            if (res) setAuth(res.value)
+            else redirect('/')
+        })
+    })
+
     const deleteItem = (refstr: string) => {
-        DeleteRef(refstr).then(() => {
-            window.location.reload()
+        DeleteRef(refstr, auth).then(() => {
+            redirect('/admindash')
         })
     }
     
@@ -29,7 +39,7 @@ export default function Reflist({ refs }: {
                         const name = formData.get("name")
 
                         if (name?.toString()) {
-                            AddRef(name?.toString()).then((res) => {
+                            AddRef(name?.toString(), auth).then((res) => {
                                 if (res) {
                                     //router.refresh()
                                     window.location.reload()

@@ -1,18 +1,21 @@
 import { Box, Flex } from "@radix-ui/themes";
-import { GetRef, GetRefList, GetSkillsList } from "../api"
+import { CheckAdmin, GetRef, GetRefList, GetSkillsList } from "../api"
 import Reflist from "./reflist"
 import RefView from "./refview";
 import SkillsList from "./skillslist";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Admin({
     searchParams
 }: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
+    const auth = (await cookies()).get('authorization')?.value
+
+    if (!auth || !(await CheckAdmin(auth))) redirect('/adminlogin')
+
     const refstr = (await searchParams)["ref"];
-    let auth = (await cookies()).get('authorization')?.value
-    auth = auth ? auth : ''
     let ref = null
 
     if (refstr) {
