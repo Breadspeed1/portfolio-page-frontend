@@ -7,12 +7,13 @@ import Socials from "./socials";
 import ProjectSection from "./projectsection";
 import { GetRef, GetRefFromJWT } from "./api";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  let auth = (await cookies()).get('authorization')?.value
-  auth = auth ? auth : ''
-  let refstr = await GetRefFromJWT(auth)
-  refstr = refstr ? refstr : ''
+  const auth = (await cookies()).get('authorization')?.value
+  if (!auth) redirect('/NOREF')
+  const refstr = await GetRefFromJWT(auth)
+  if (!refstr) redirect('/NOREF')
   let reference = await GetRef(refstr, auth)
 
   //if (!reference) redirect(FAILURE_REDIRECT)
