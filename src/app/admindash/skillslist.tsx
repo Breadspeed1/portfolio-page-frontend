@@ -3,7 +3,7 @@
 import Fuse from "fuse.js"
 import Form from "next/form"
 import { ChangeEvent, useState } from "react"
-import { AddSkillToRef, CreateSkill, DeleteSkill, RemoveSkillFromRef } from "./api"
+import { AddSkillToRef, CreateSkill, DeleteSkill, RemoveSkillFromRef } from "../api"
 import { Button, Card, Flex, ScrollArea, Strong, Text, TextField } from "@radix-ui/themes"
 
 export default function SkillsList({

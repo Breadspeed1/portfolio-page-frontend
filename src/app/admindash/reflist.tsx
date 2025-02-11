@@ -1,6 +1,6 @@
 'use client'
 
-import { AddRef, DeleteRef } from "./api"
+import { AddRef, DeleteRef } from "../api"
 import Form from 'next/form'
 import { redirect } from "next/navigation"
 import { Button, Card, Flex, ScrollArea, Text, TextField } from "@radix-ui/themes"

@@ -1,6 +1,6 @@
 import Nav from "@/app/project/[slug]/nav"
 import { Card, Flex, Heading, Separator } from "@radix-ui/themes"
-import { PROJECTS } from '../../[slug]/projects';
+import { PROJECTS } from '../../projects';
 import { redirect } from "next/navigation";
 
 
