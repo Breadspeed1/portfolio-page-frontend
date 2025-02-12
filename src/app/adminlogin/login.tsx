@@ -24,7 +24,7 @@ function handleEnter(data: FormData) {
 export default function Login() {
     return (
         <Form action={handleEnter}>
-            <TextField.Root size='3' name='pw' placeholder="Enter Password" />
+            <TextField.Root size='3' type="password" name='pw' placeholder="Enter Password" />
         </Form>
     )
 }
