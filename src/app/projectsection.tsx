@@ -21,7 +21,7 @@ export default function ProjectSection({
                     skills.length > 0 ? 
                     <>
                         But for now, I&apos;ve heard that you are looking for some skills like:
-                        <Strong><ul> {skills.map((s) => {
+                        <Strong><ul style={{marginBottom: "-40px"}}> {skills.map((s) => {
                             return <li key={s}>{s}</li>
                         })} </ul></Strong>
                     </> : <></>
@@ -29,7 +29,7 @@ export default function ProjectSection({
                 <br/>
                 <br/>
                 <Text weight="light" color="red">
-                    Hint: You can click on them to read more! (please do I spent time writing about them for your pleasure)
+                    Hint: You can click on them to read more! (please do I spent time writing about them for yall to read)
                 </Text>
             </Blockquote>
             <Flex direction="row" justify="center" wrap="wrap" mt="5" gap="5">
