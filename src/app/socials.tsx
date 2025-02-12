@@ -15,7 +15,7 @@ export default function Socials() {
         <Section id="socials" mx="6" flexShrink="1" width={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }}>
             <Heading size="9">Socials</Heading>
             <Separator my="2" size="4"/>
-            <Flex justify="center" gapX="9" align="center" my="4">
+            <Flex justify="center" gapX={{ initial: "6", md: "8" }} align="center" my="4">
                 <Tooltip content="View My Linkedin!">
                     <IconButton onClick={() => open(LINKDEDIN_LINK)} variant="ghost" >
                         <LinkedInLogoIcon cursor="pointer" width="48" height="48"/>
