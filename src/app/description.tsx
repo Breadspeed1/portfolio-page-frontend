@@ -25,7 +25,7 @@ export default function Description(props: { name: string }) {
   
     return (
       <Section id='about-me' mx="6" flexShrink="1" maxWidth={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }}>
-        <Heading size="9">Hey <Strong>{slug}</Strong>,<br/> I&apos;m Aiden.</Heading>
+        <Heading style={{lineHeight: "1.2"}} size="9">Hey <Strong>{slug}</Strong>,<br/> I&apos;m Aiden.</Heading>
         <Separator my="2" size="4"/>
         <Blockquote size="4">
           I am curently a student of <Strong>Software Engineering</Strong> at Rochester Institute of Technology (<Strong>RIT</Strong>).
