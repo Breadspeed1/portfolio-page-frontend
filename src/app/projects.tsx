@@ -256,7 +256,7 @@ export const PROJECTS: ProjectData[] = [
                 title: "What are subsystems?",
                 html: <Blockquote>
                     <Text style={{ textIndent: "2em" }} as="p">
-                        From a bir&apos;s eye view, a robot has a collection of subsystems (which may also have subsystems as their own) and each of those subsystems
+                        From a bird&apos;s eye view, a robot has a collection of subsystems (which may also have subsystems as their own) and each of those subsystems
                         should behave, from their point of view, independently. They should be orchestrated by their parent subsystem.
                         For example, a robot that is designed to pick up and launch disks might include a drivetrain subsystem, intake subsystem, and launcher subsystem.
                         So, in the default command based framework, each subsystem would be allowed to schedule any command to act on any other subsystem or itself (including parent subsystems).
