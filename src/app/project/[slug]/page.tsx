@@ -25,7 +25,7 @@ export default async function ProjectPage({
             <Heading mx="3" wrap="wrap" size="9" mt="9" align="center">{proj.title}</Heading>
             <Heading mx="3" wrap="wrap" weight="medium" size="6" mt="4" align="center">{proj.subtitle}</Heading>
             <Separator size="4" my="5"/>
-            <Flex mx="6" flexShrink="1" width={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }} justify="center" direction="column">
+            <Flex mx="6" flexShrink="1" width={{ initial: "90vw", sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }} justify="center" direction="column">
                 {proj.sections.map((sec) => {
                     return <Flex my="5" key={sec.title} direction="column">
                         <Heading wrap="wrap" size="8">{sec.title}</Heading>

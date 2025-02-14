@@ -21,10 +21,10 @@ export default function ProjectCard({
                     <Inset clip="padding-box" side="left" pr="current">
                         <Image src={projectData.thumbnailPath} alt="Project Thumbnail" height={150} width={150} />
                     </Inset>
-                    <Box width="175px">
-                        <Strong>{projectData.title}</Strong>
+                    <Box ml="1" maxWidth="175px" height="auto">
+                        <Text wrap="wrap" size={{initial: "2", sm: "3"}}><Strong>{projectData.title}</Strong></Text>
                         <Separator my="3" size="4" />
-                        <Text wrap="wrap">{projectData.subtitle}</Text>
+                        <Text wrap="wrap" size={{initial: "1", sm: "3"}}>{projectData.subtitle}</Text>
                     </Box>
                 </Grid>
             </Card>
