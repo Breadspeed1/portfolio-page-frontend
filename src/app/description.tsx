@@ -28,7 +28,7 @@ export default function Description(props: { name: string }) {
         <Heading style={{lineHeight: "1.2"}} size="9">Hey <Strong>{slug}</Strong>,<br/> I&apos;m Aiden.</Heading>
         <Separator my="2" size="4"/>
         <Blockquote size="4">
-          I am curently a student of <Strong>Software Engineering</Strong> at Rochester Institute of Technology (<Strong>RIT</Strong>).
+          I am currently a student of <Strong>Software Engineering</Strong> at Rochester Institute of Technology (<Strong>RIT</Strong>).
           I am a <Strong>full-stack</Strong> engineer, and I especially enjoy <Strong>back-end</Strong>.
           My favorite language to work in is <Strong>Rust</Strong>.
         </Blockquote>
