@@ -58,7 +58,7 @@ export async function GetSkillsList(auth: string) {
 }
 
 export async function CreateSkill(skill: string, auth: string) {
-    return (await makeReqWithAuth('/skills/create' + skill, auth, 'POST')).ok
+    return (await makeReqWithAuth('/skills/create/' + skill, auth, 'POST')).ok
 }
 
 export async function AddSkillToRef(refstr: string, skill: string, auth: string) {
