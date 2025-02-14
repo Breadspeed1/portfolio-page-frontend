@@ -1,4 +1,4 @@
-import { Blockquote, Code, Em, Quote, Separator, Strong, Text } from "@radix-ui/themes"
+import { Blockquote, Code, Em, Link, Quote, Separator, Strong, Text } from "@radix-ui/themes"
 import { ReactElement } from "react"
 
 export type ProjectSection =  {
@@ -21,6 +21,14 @@ export const PROJECTS: ProjectData[] = [
         thumbnailPath: "/portfolio.png",
         id: 0,
         sections: [
+            {
+                title: "Links",
+                html: <Blockquote>
+                    <Link href="https://github.com/Breadspeed1/portfolio-page-frontend">Frontend</Link>
+                    <br/>
+                    <Link href="https://github.com/Breadspeed1/portfolio-page-backend">Backend</Link>
+                </Blockquote>
+            },
             {
                 title: "Why did I spend so much time on this?",
                 html: (
@@ -208,6 +216,14 @@ export const PROJECTS: ProjectData[] = [
         subtitle: "Logic framework for FRC5907",
         sections: [
             {
+                title: "Links",
+                html: <Blockquote>
+                    <Link href="https://github.com/CCShambots/ShamLib/tree/main/SMF">FRC5907 State Machine Framework</Link>
+                    <br/>
+                    <Link href="https://github.com/CCShambots/Shambots5907_24CompBot">FRC5907 2024 Season Robot Code</Link>
+                </Blockquote>
+            },
+            {
                 title: "What is it?",
                 html: <Blockquote>
                     <Text style={{ textIndent: "2em" }} as="p">
@@ -234,13 +250,13 @@ export const PROJECTS: ProjectData[] = [
             {
                 title: "Initial Design",
                 html: <Blockquote>
-                    <Text style={{ textIndent: "2em" }} as="p">
+                    <Text style={{ textIndent: "2em" }}>
                         I started this project in the offseason after &apos;22 season because our code was a mess frankly that year and I felt as though I needed to do something about it.
                         I know I mentioned earlier that the issue was a design philosphy issue, but due to our limited time and personell allocated to training, my goal was to create a framework that would
                         inform and advise as much of the design philosophy as I could.
                         <br/>
                         So, here were my main points.
-                        <ul>
+                        <ul style={{ textIndent: "0px" }}>
                             <li>Localize subsystem behavior as much as possible</li>
                             <li>Avoid allowing for race conditions</li>
                             <li>Be expressive specifically for subsystem behavior</li>
@@ -248,7 +264,6 @@ export const PROJECTS: ProjectData[] = [
 
                         And from those, I landed on state machines.
                         Immediately after learning about state machines, I became somewhat obsessed because of how they seemed to match my problem domain almost exactly.
-                        Being a highschooler, I skipped most of the research on how to properly do state machines and ended on a possibly dubious implementation but we&apos;ll get to that in a bit.
                     </Text>
                 </Blockquote>
             },
@@ -268,7 +283,7 @@ export const PROJECTS: ProjectData[] = [
                 title: "How Does SMF Work?",
                 html: <Blockquote>
                     <Text style={{ textIndent: "2em" }} as="p">
-                        Under SMF, command scheduling and canceling is managed by a parent class (StateMachine) which is to be extended by all subsystems in the robot.
+                        Under SMF, command scheduling and canceling is managed by a parent class (<Code>StateMachine</Code>) which is to be extended by all subsystems in the robot.
                         Each subsystem defines an enum that contains all possible states that the subsystem can be in as well as behavior for those states (a command or composition of commands) and finally which transitions between those states are valid.
                         Think of the states as elements in a finite set and the transitions as a relation graph for that set.
                         When a transition is defined a command or composition of commands can be provided to be run for that specific defined transition or set of transitions.
@@ -286,7 +301,7 @@ export const PROJECTS: ProjectData[] = [
                         In the &apos;24 season, I was almost entirely done with the code of the robot (minus tuning) by the time we had the bot finalized which is a massive improvement compared to it being the last thing to be started.
                         It helped me enforce the complete planning out of all behavior of each subsystem before having the bot built and splitting complex actions or sequences of actions into discrete states for simplification.
                         For example, in &apos;24 we had an indexing system that would intake a foam ring from the back or front and hold on to it/position it in exactly the right spot and eject/slowly feed the ring to the shooter when requested.
-                        This sounded difficult but was very simple when split up into a few states, namely HOLDING_RING, INTAKE_FRONT, INTAKE_BACK, INDEXING, etc.
+                        This sounded difficult but was very simple when split up into a few states, namely <Code>HOLDING_RING</Code>, <Code>INTAKE_FRONT</Code>, <Code>INTAKE_BACK</Code>, <Code>INDEXING</Code>, etc.
                         This also isolated all behavior into a single section in a single subsystem.
                         Gone were the days of one subsystem&apos;s rogue scheduling of a command on another subsystem wreaking havoc on the rest of the bot and taking days to find.
                         Whenever we had an issue we were able to narrow it down to a single state&apos;s faliure within a single subsystem and the issue could be resolved by editing only the code inside of that state which was usually not a lot (maybe 50loc MAX) compared to combing through the entire codebase to find all commands that could have been scheduled on the subsystem in question.
@@ -299,15 +314,15 @@ export const PROJECTS: ProjectData[] = [
                     <Text style={{ textIndent: "2em" }} as="p">
                         This may sound like a complicated system, but in reality it was very simple.
                         There is one class that the user of the framework interacts with (StateMachine) and they extend it and provide implementations for one method and an enum of states.
-                        That one method is determineSelf() which is called when the subsystem is enabled and asks for the user to set the state to whatever state it should be in at that moment (IDLE in most cases).
+                        That one method is <Code>determineSelf()</Code> which is called when the subsystem is enabled and asks for the user to set the state to whatever state it should be in at that moment (<Code>IDLE</Code> in most cases).
                         Other than that the framework provides some niceties like flag states which can indicate different things to the orchestrating subsystem.
-                        For example, one pattern we often used was a TRACKING or ALIGNING state which would show the READY flag for the orchestrating machine to see and decide what to do next or if an action could be taken.
+                        For example, one pattern we often used was a <Code>TRACKING</Code> or <Code>ALIGNING</Code> state which would show the <Code>READY</Code> flag for the orchestrating machine to see and decide what to do next or if an action could be taken.
                         Each subsystem can also be assigned children which it is in charge of orchestrating.
                         For me, this is another layer of seperation of concerns.
                         I like the orchestration model because feeding input through to individual subsystems can be kind of ugly when that input should do different things based on the state of other subsystems.
-                        Usually, we end up with a RobotContainer state machine that orchestrates all of the robot&apos;s subsystems and then those subsystems may have some children of their own to further break out behavior.
+                        Usually, we end up with a <Code>RobotContainer</Code> state machine that orchestrates all of the robot&apos;s subsystems and then those subsystems may have some children of their own to further break out behavior.
                         This ends up in pretty-looking code (in my opinion) where joystick inputs are fed to the robot container and it just transitions overall states which manage all of the states of its children.
-                        So, we just end up with overall game states for the robot container like AUTONOMOUS, TRAVERSING (traveling across the field), SCORING, and some other game-specific ones.
+                        So, we just end up with overall game states for the robot container like <Code>AUTONOMOUS</Code>, <Code>TRAVERSING</Code> (traveling across the field), <Code>SCORING</Code>, and some other game-specific ones.
                         And because of this, when you look at what each button does on the joystick most of them really just change the overall state of the robot which is very easy to understand for new team members and even non programmers.
                         The states are oftentimes expressive enough for someone to be able to look at the code and understand how it operates even if they don&apos;t have much programming experience.
                     </Text>

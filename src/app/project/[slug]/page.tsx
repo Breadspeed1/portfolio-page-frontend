@@ -28,7 +28,7 @@ export default async function ProjectPage({
             <Flex mx="6" flexShrink="1" width={{ sm: "80vw", lg: "50vw", md: "60vw", xl: "40vw" }} justify="center" direction="column">
                 {proj.sections.map((sec) => {
                     return <Flex my="5" key={sec.title} direction="column">
-                        <Heading size="8">{sec.title}</Heading>
+                        <Heading wrap="wrap" size="8">{sec.title}</Heading>
                         <Separator my="2" size="3" />
                         {sec.html}
                     </Flex>
