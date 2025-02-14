@@ -1,4 +1,5 @@
 import { Blockquote, Code, Em, Quote, Separator, Strong, Text } from "@radix-ui/themes"
+import Image from "next/image"
 import { ReactElement } from "react"
 
 export type ProjectSection =  {
@@ -201,4 +202,133 @@ export const PROJECTS: ProjectData[] = [
             }
         ]
     },
+    {
+        title: "State Machine Framework",
+        thumbnailPath: "/shambot.png",
+        id: 1,
+        subtitle: "Logic framework for FRC5907",
+        sections: [
+            {
+                title: "What is it?",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        Well, I&apos;m glad you asked!
+                        The <Strong>State Machine Framework (SMF)</Strong> was created as a better way to organize, describe, and orchestrate robot behavior on a subsystem scale.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "Why is it?",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        First a bit of background. WPI, the providers of the standard first Java library that almost all teams provide a command-based project template that comes
+                        with a built in event loop, command scheduler, subsystems (which can be referenced as requirements in commands) and a whole bunch of other niceties.
+                        While using the base template is fine, because of the inexperienced nature of our team members (and our lack of training ability) we ran into lots of speghetified code
+                        and disjointed dependencies which induced race conditions and all sorts of other issues that are hard to track down.
+                        Because of this, we implemented a hacky solution that we dubbed the &quot;Priority Command System (PCS)&quot; which allowed you to assign a priority to each command that could be run
+                        and the scheduler would prioritize commands based on their, well, priority value instead of running multiple related commands at once in order to avoid race conditions.
+                        This worked for a while, but we ran in to many of the same issues, and I figured that the nature of our problem was closer to design philosophy and not strictly that the framework we used couldn&apos;t automatically avoid race conditions.
+                        TLDR: we should not have been creating race conditions in the first place.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "Initial Design",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        I started this project in the offseason after &apos;22 season because our code was a mess frankly that year and I felt as though I needed to do something about it.
+                        I know I mentioned earlier that the issue was a design philosphy issue, but due to our limited time and personell allocated to training, my goal was to create a framework that would
+                        inform and advise as much of the design philosophy as I could.
+                        <br/>
+                        So, here were my main points.
+                        <ul>
+                            <li>Localize subsystem behavior as much as possible</li>
+                            <li>Avoid allowing for race conditions</li>
+                            <li>Be expressive specifically for subsystem behavior</li>
+                        </ul>
+
+                        And from those, I landed on state machines.
+                        Immediately after learning about state machines, I became somewhat obsessed because of how they seemed to match my problem domain almost exactly.
+                        Being a highschooler, I skipped most of the research on how to properly do state machines and ended on a possibly dubious implementation but we&apos;ll get to that in a bit.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "What are subsystems?",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        From a bir&apos;s eye view, a robot has a collection of subsystems (which may also have subsystems as their own) and each of those subsystems
+                        should behave, from their point of view, independently. They should be orchestrated by their parent subsystem.
+                        For example, a robot that is designed to pick up and launch disks might include a drivetrain subsystem, intake subsystem, and launcher subsystem.
+                        So, in the default command based framework, each subsystem would be allowed to schedule any command to act on any other subsystem or itself (including parent subsystems).
+                        This, in my opinion and experience, causes a bunch of issues when you have inexperienced developers.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "How Does SMF Work?",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        Under SMF, command scheduling and canceling is managed by a parent class (StateMachine) which is to be extended by all subsystems in the robot.
+                        Each subsystem defines an enum that contains all possible states that the subsystem can be in as well as behavior for those states (a command or composition of commands) and finally which transitions between those states are valid.
+                        Think of the states as elements in a finite set and the transitions as a relation graph for that set.
+                        When a transition is defined a command or composition of commands can be provided to be run for that specific defined transition or set of transitions.
+                        This was intended to be the main functionality initially, but over the course of the next couple seasons I ended up with the philosophy that any transition behavior that takes more than a very small amount of constant time should in itself be a state.
+                        There is also some failsafe behavior behind the scenes to help in the case of multiple transitions being scheduled and other such edge cases.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "How does it do in practice?",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        Over the course of the two years that I used it (they didn&apos;t stop, I just graduated and they still use it!), it solved a lot of our issues.
+                        It made planning out subsystems and subsystem behavior in advance a lot easier.
+                        In the &apos;24 season, I was almost entirely done with the code of the robot (minus tuning) by the time we had the bot finalized which is a massive improvement compared to it being the last thing to be started.
+                        It helped me enforce the complete planning out of all behavior of each subsystem before having the bot built and splitting complex actions or sequences of actions into discrete states for simplification.
+                        For example, in &apos;24 we had an indexing system that would intake a foam ring from the back or front and hold on to it/position it in exactly the right spot and eject/slowly feed the ring to the shooter when requested.
+                        This sounded difficult but was very simple when split up into a few states, namely HOLDING_RING, INTAKE_FRONT, INTAKE_BACK, INDEXING, etc.
+                        This also isolated all behavior into a single section in a single subsystem.
+                        Gone were the days of one subsystem&apos;s rogue scheduling of a command on another subsystem wreaking havoc on the rest of the bot and taking days to find.
+                        Whenever we had an issue we were able to narrow it down to a single state&apos;s faliure within a single subsystem and the issue could be resolved by editing only the code inside of that state which was usually not a lot (maybe 50loc MAX) compared to combing through the entire codebase to find all commands that could have been scheduled on the subsystem in question.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "Behind The Scenes",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        This may sound like a complicated system, but in reality it was very simple.
+                        There is one class that the user of the framework interacts with (StateMachine) and they extend it and provide implementations for one method and an enum of states.
+                        That one method is determineSelf() which is called when the subsystem is enabled and asks for the user to set the state to whatever state it should be in at that moment (IDLE in most cases).
+                        Other than that the framework provides some niceties like flag states which can indicate different things to the orchestrating subsystem.
+                        For example, one pattern we often used was a TRACKING or ALIGNING state which would show the READY flag for the orchestrating machine to see and decide what to do next or if an action could be taken.
+                        Each subsystem can also be assigned children which it is in charge of orchestrating.
+                        For me, this is another layer of seperation of concerns.
+                        I like the orchestration model because feeding input through to individual subsystems can be kind of ugly when that input should do different things based on the state of other subsystems.
+                        Usually, we end up with a RobotContainer state machine that orchestrates all of the robot&apos;s subsystems and then those subsystems may have some children of their own to further break out behavior.
+                        This ends up in pretty-looking code (in my opinion) where joystick inputs are fed to the robot container and it just transitions overall states which manage all of the states of its children.
+                        So, we just end up with overall game states for the robot container like AUTONOMOUS, TRAVERSING (traveling across the field), SCORING, and some other game-specific ones.
+                        And because of this, when you look at what each button does on the joystick most of them really just change the overall state of the robot which is very easy to understand for new team members and even non programmers.
+                        The states are oftentimes expressive enough for someone to be able to look at the code and understand how it operates even if they don&apos;t have much programming experience.
+                    </Text>
+                </Blockquote>
+            },
+            {
+                title: "Concluding Thoughts",
+                html: <Blockquote>
+                    <Text style={{ textIndent: "2em" }} as="p">
+                        Despite its relatively small size (~800loc), this is definitely one of my proudest projects.
+                        I love that my team still uses it even when I&apos;m not there to beg them to, and the new programmers (both sophomores) tell me all the reasons they like it.
+                        There are definitely some questionable decisions in the logic, but overall it works and it works well.
+                        I really like how expressive it is and how it <del>forces</del> encourages my design philosophy of single-concern behavior.
+                        And believe it or not, they actually plan out the bot&apos;s behavior before it&apos;s built! Shocker!
+                        <br/>
+                        <br/>
+                        Well, thank you for reading this ramble session!
+                    </Text>
+                </Blockquote>
+            }
+        ]
+    }
 ]
