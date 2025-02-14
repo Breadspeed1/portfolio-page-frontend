@@ -1,5 +1,4 @@
 import { Blockquote, Code, Em, Quote, Separator, Strong, Text } from "@radix-ui/themes"
-import Image from "next/image"
 import { ReactElement } from "react"
 
 export type ProjectSection =  {
