@@ -6,7 +6,7 @@ import { Section, Heading, Separator, Flex, IconButton, Tooltip } from "@radix-u
 const GITHUB_LINK = "https://github.com/Breadspeed1";
 const LINKDEDIN_LINK = "https://linkedin.com/in/aiden-voth-a0972b334";
 const RESUME_LINK = "https://docs.google.com/document/d/1Res_po3ysesxdx-b7ChpiR7nbEQbNKYid7oQTe9Wr-c/edit?usp=sharing";
-const EMAIL = "mailto:ajv7509@rit.edu?subject=You%20Got%20The%20Job!"
+const EMAIL = "mailto:aiden@voth.name?subject=You%20Got%20The%20Job!"
 
 export default function Socials() {
     const open = (link: string) => window.open(link, '_blank')?.focus()
