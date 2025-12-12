@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GetJWTForRef, GetRefFromJWT } from "./app/api";
 
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const res = NextResponse.next()
     const slug = request.nextUrl.pathname.split('/').at(-1)
     const cookie = request.cookies.get("authorization")
