@@ -14,11 +14,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
   return (
       <html lang="en">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <body>
-          <ThemeProvider defaultTheme="light" attribute="class">
+          <ThemeProvider defaultTheme={prefersDark ? "dark" : "light"} attribute="class">
             <Theme 
               panelBackground="translucent"
               scaling="110%"
